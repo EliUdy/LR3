@@ -1,0 +1,49 @@
+/*
+Theme Name:     LR2
+ Theme URI:      https://letsremodel.net
+ Description:    A TwentySixteen child theme made for use with <a href="https://elementor.com">Elementor</a>.
+ Author:         @eli_udy
+ Author URI:     https://twitter.com/Eli_Udy
+ Template:       twentysixteen
+ Version:        1.0.0
+*/
+ 
+/* Add Custom CSS after this line */
+
+.full-width {
+	width: 100%;
+}
+
+.site-inner {
+    max-width: 100%;
+}
+
+.site-content {
+    padding: 0;
+}
+
+header#masthead,
+footer#colophon {
+	margin: 0 auto;
+	max-width: 1320px;
+}
+ 
+.entry-content {
+		margin-right: auto;
+		margin-left: auto;
+}
+
+@media screen and (min-width: 56.875em) {
+
+	.entry-content {
+		margin-right: auto;
+		margin-left: auto;
+	}
+}
+
+@media screen and (min-width: 44.375em) {
+
+	.entry-content {
+		margin-right: auto;
+	}
+}
