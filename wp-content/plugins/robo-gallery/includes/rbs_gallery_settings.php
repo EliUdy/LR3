@@ -60,6 +60,21 @@ wp_enqueue_style ( 	'robosoft-gallery-about', ROBO_GALLERY_URL.'css/admin/about.
 				</td>
 			</tr>
 			<tr>
+				<th scope="row"><?php _e('Font Awesome', 'rbs_gallery'); ?></th>
+				<td>
+					<fieldset>
+						<legend class="screen-reader-text"><span><?php _e('Font Awesome', 'rbs_gallery'); ?></span></legend>
+						<label title='<?php _e('Load', 'rbs_gallery'); ?>'>
+							<input type='radio' name='<?php echo ROBO_GALLERY_PREFIX.'fontLoad'; ?>' value='on' <?php if( get_option(ROBO_GALLERY_PREFIX.'fontLoad', 'on')=='on' ) echo " checked='checked'";?> /> <?php _e('Load', 'rbs_gallery'); ?>
+						</label><br />
+						<label title='<?php _e('Don\'t load', 'rbs_gallery'); ?>'>
+							<input type='radio' name='<?php echo ROBO_GALLERY_PREFIX.'fontLoad'; ?>' value='off' <?php if( get_option(ROBO_GALLERY_PREFIX.'fontLoad')=='off' ) echo " checked='checked'";?>  /> <?php _e('Don\'t load', 'rbs_gallery'); ?>
+						</label>
+						<p class="description">[ for the case if Your theme already have awesome fonts loaded ]</p>
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
 				<th scope="row"><?php _e('Switch Style', 'rbs_gallery'); ?></th>
 				<td>
 					<fieldset>
@@ -93,6 +108,22 @@ wp_enqueue_style ( 	'robosoft-gallery-about', ROBO_GALLERY_URL.'css/admin/about.
 					</fieldset>
 				</td>
 			</tr>
+
+			<tr>
+				<th scope="row"><?php _e('Express panel', 'rbs_gallery'); ?></th>
+				<td>
+					<fieldset>
+						<legend class="screen-reader-text"><span><?php _e('Enable', 'rbs_gallery'); ?></span></legend>
+						<label title='<?php _e('Enable', 'rbs_gallery'); ?>'>
+							<input type='radio' name='<?php echo ROBO_GALLERY_PREFIX.'expressPanel'; ?>' value='1' <?php if( get_option(ROBO_GALLERY_PREFIX.'expressPanel')==1 ) echo " checked='checked'"; ?> /> <?php _e('Enable'); ?>
+						</label><br />
+						<label title='<?php _e('Disable', 'rbs_gallery'); ?>'>
+							<input type='radio' name='<?php echo ROBO_GALLERY_PREFIX.'expressPanel'; ?>' value='0' <?php if( !get_option(ROBO_GALLERY_PREFIX.'expressPanel', '') ) echo " checked='checked'"; ?>  /> <?php _e('Disable'); ?>
+						</label><br />			
+					</fieldset>
+				</td>
+			</tr>
+
 			<tr>
 				<th colspan="2"><h2><?php _e('Create Post Settings', 'rbs_gallery'); ?></h2></th>
 			</tr>

@@ -55,7 +55,6 @@
                     	
                     	wpcufpn_select_open = true;
                     	
-                    	//console.log( 'opening select' );	//Debug
                     	var html = '<div id="wpcufpn_widgetlist">' +
                     		'<select id="wpcufpn_widget_select" size="7">';
                     	$.each(wpcufpn_widgets, function( index, value ){
@@ -70,8 +69,6 @@
                     	select.appendTo($('div#content_toolbargroup').parent()).hide().show( 'slide' );
                     	
                     	select.on( 'change', function(e){
-                        	//console.log( 'selected e: ' + $('option:selected', this).val() );	//Debug
-                        	//console.log( e );													//Debug
                         	insertShortcode( $('option:selected', this).val(), $('option:selected', this).text() );
                         	$(this).hide('slide', function() { $('#wpcufpn_widgetlist').remove() });
                         	wpcufpn_select_open = false;

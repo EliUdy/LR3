@@ -4,17 +4,14 @@ namespace Elementor;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Widgets_Manager {
-
 	/**
 	 * @var Widget_Base[]
 	 */
-	protected $_registered_widgets = null;
+	private $_widget_types = null;
 
 	private function _init_widgets() {
-		include_once( ELEMENTOR_PATH . 'includes/elements/base.php' );
-		include( ELEMENTOR_PATH . 'includes/widgets/base.php' );
-
 		$build_widgets_filename = [
+			'common',
 			'heading',
 			'image',
 			'text-editor',
@@ -44,14 +41,16 @@ class Widgets_Manager {
 			'sidebar',
 		];
 
-		$this->_registered_widgets = [];
+		$this->_widget_types = [];
+
 		foreach ( $build_widgets_filename as $widget_filename ) {
 			include( ELEMENTOR_PATH . 'includes/widgets/' . $widget_filename . '.php' );
 
-			$class_name = ucwords( $widget_filename );
-			$class_name = str_replace( '-', '_', $class_name );
+			$class_name = str_replace( '-', '_', $widget_filename );
 
-			$this->register_widget( __NAMESPACE__ . '\Widget_' . $class_name );
+			$class_name = __NAMESPACE__ . '\Widget_' . $class_name;
+
+			$this->register_widget_type( new $class_name() );
 		}
 
 		$this->_register_wp_widgets();
@@ -74,61 +73,72 @@ class Widgets_Manager {
 				'Pojo_Slideshow_Widget',
 				'Pojo_Forms_Widget',
 				'Pojo_Widget_News_Ticker',
+
+				'Pojo_Widget_WC_Products',
+				'Pojo_Widget_WC_Products_Category',
+				'Pojo_Widget_WC_Product_Categories',
 			];
 
 			if ( $widget_obj instanceof \Pojo_Widget_Base && ! in_array( $widget_class, $allowed_widgets ) ) {
 				continue;
 			}
 
-			$this->register_widget( __NAMESPACE__ . '\Widget_WordPress', [ 'widget_name' => $widget_class ] );
+			$elementor_widget_class = __NAMESPACE__ . '\Widget_WordPress';
+
+			$this->register_widget_type( new $elementor_widget_class( null, [ 'widget_name' => $widget_class ] ) );
 		}
 	}
 
-	public function register_widget( $widget_class, $args = [] ) {
-		if ( ! class_exists( $widget_class ) ) {
-			return new \WP_Error( 'widget_class_name_not_exists' );
-		}
-
-		$widget_instance = new $widget_class( $args );
-
-		if ( ! $widget_instance instanceof Widget_Base ) {
-			return new \WP_Error( 'wrong_instance_widget' );
-		}
-		$this->_registered_widgets[ $widget_instance->get_id() ] = $widget_instance;
-
-		return true;
+	private function _require_files() {
+		require_once ELEMENTOR_PATH . 'includes/base/element-base.php';
+		require ELEMENTOR_PATH . 'includes/base/widget-base.php';
+		// require ELEMENTOR_PATH . 'includes/widgets/multi-section-base.php';
 	}
 
-	public function unregister_widget( $id ) {
-		if ( ! isset( $this->_registered_widgets[ $id ] ) ) {
-			return false;
-		}
-		unset( $this->_registered_widgets[ $id ] );
-		return true;
-	}
-
-	public function get_registered_widgets() {
-		if ( is_null( $this->_registered_widgets ) ) {
+	public function register_widget_type( Widget_Base $widget ) {
+		if ( is_null( $this->_widget_types ) ) {
 			$this->_init_widgets();
 		}
-		return $this->_registered_widgets;
+
+		$this->_widget_types[ $widget->get_name() ] = $widget;
+
+		return true;
 	}
 
-	public function get_widget( $id ) {
-		$widgets = $this->get_registered_widgets();
-
-		if ( ! isset( $widgets[ $id ] ) ) {
+	public function unregister_widget_type( $name ) {
+		if ( ! isset( $this->_widget_types[ $name ] ) ) {
 			return false;
 		}
-		return $widgets[ $id ];
+
+		unset( $this->_widget_types[ $name ] );
+
+		return true;
 	}
 
-	public function get_registered_widgets_data() {
-		$data = [];
-		foreach ( $this->get_registered_widgets() as $widget ) {
-			$data[ $widget->get_id() ] = $widget->get_data();
+	public function get_widget_types( $widget_name = null ) {
+		if ( is_null( $this->_widget_types ) ) {
+			$this->_init_widgets();
 		}
-		return $data;
+
+		if ( $widget_name ) {
+			return isset( $this->_widget_types[ $widget_name ] ) ? $this->_widget_types[ $widget_name ] : null;
+		}
+
+		return $this->_widget_types;
+	}
+
+	public function get_widget_types_config() {
+		$config = [];
+
+		foreach ( $this->get_widget_types() as $widget ) {
+			if ( 'common' === $widget->get_name() ) {
+				continue;
+			}
+
+			$config[ $widget->get_name() ] = $widget->get_config();
+		}
+
+		return $config;
 	}
 
 	public function ajax_render_widget() {
@@ -151,11 +161,16 @@ class Widgets_Manager {
 
 		// Start buffering
 		ob_start();
-		$widget = $this->get_widget( $data['widgetType'] );
-		if ( false !== $widget ) {
-			$data['settings'] = $widget->get_parse_values( $data['settings'] );
-			$widget->render_content( $data['settings'] );
-		}
+
+		/** @var Widget_Base|Widget_WordPress $widget_type */
+		$widget_type = $this->get_widget_types( $data['widgetType'] );
+
+		$widget_class = $widget_type->get_class_name();
+
+		/** @var Widget_Base $widget */
+		$widget = new $widget_class( $data, $widget_type->get_default_args() );
+
+		$widget->render_content();
 
 		$render_html = ob_get_clean();
 
@@ -172,7 +187,8 @@ class Widgets_Manager {
 		}
 
 		$widget_type = $_POST['widget_type'];
-		$widget_obj = $this->get_widget( $widget_type );
+
+		$widget_obj = $this->get_widget_types( $widget_type );
 
 		if ( ! $widget_obj instanceof Widget_WordPress ) {
 			wp_send_json_error();
@@ -184,12 +200,14 @@ class Widgets_Manager {
 	}
 
 	public function render_widgets_content() {
-		foreach ( $this->get_registered_widgets() as $widget ) {
+		foreach ( $this->get_widget_types() as $widget ) {
 			$widget->print_template();
 		}
 	}
 
 	public function __construct() {
+		$this->_require_files();
+
 		add_action( 'wp_ajax_elementor_render_widget', [ $this, 'ajax_render_widget' ] );
 		add_action( 'wp_ajax_elementor_editor_get_wp_widget_form', [ $this, 'ajax_get_wp_widget_form' ] );
 	}

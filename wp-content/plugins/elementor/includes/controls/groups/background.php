@@ -56,7 +56,6 @@ class Group_Control_Background extends Group_Control_Base {
 				'label' => _x( 'Color', 'Background Control', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
-				'tab' => $args['tab'],
 				'title' => _x( 'Background Color', 'Background Control', 'elementor' ),
 				'selectors' => [
 					$args['selector'] => 'background-color: {{VALUE}};',
@@ -181,6 +180,7 @@ class Group_Control_Background extends Group_Control_Base {
 
 		$controls['video_fallback'] = [
 			'label' => _x( 'Background Fallback', 'Background Control', 'elementor' ),
+			'description' => __( 'This cover image will replace the background video on mobile or tablet.', 'elementor' ),
 			'type' => Controls_Manager::MEDIA,
 			'label_block' => true,
 			'condition' => [

@@ -545,41 +545,74 @@ a:active {
 --------------------------------------------------------------*/
 /*-- sticky white navbar --*/
 
+
 #masthead {
-position: fixed;
-padding: 20px 0;
-z-index: 5;
-background-color: white;
-min-width: 100%;
-border-bottom-width:3px;
-border-bottom-color:#f2f2f2;
-border-bottom-style:solid;
+	position: fixed;
+	padding: 10px 0;
+	z-index: 5;
+	background-color: white;
+	min-width: 100%;
+	border-bottom-width:3px;
+	border-bottom-color:#f2f2f2;
+	border-bottom-style:solid;
 }
+
+
 /*-- end sticky white navbar --*/
+
+/*-- Call to Action--*/
+.main-navigation .nav-cta {
+	margin-right: 75px;
+	color: white;
+	background-color: #35b347;
+	border-color: #f2f2f2;
+	border-style: solid;
+	border-width: 2px;}
+
+.main-navigation .nav-cta a{
+	color: white;
+	font-weight: 600;}
+	
+	.main-navigation .nav-cta:hover{
+	background-color: gray;
+	}
+		.main-navigation .nav-cta a:hover{
+	color: white;
+	}
+
+/*-- /End Call to Action --*/
+
 .main-navigation {
 	clear: both;
 	display: block;
-	float: left;
+	float:right;
 	width: 100%;
 }
 
 .main-navigation ul {
 	display: none;
 	list-style: none;
-	margin: 0;
 	padding-left: 0;
+	font-family: 'lato', sans-serif;
+	font-size: 20px;
+	font-weight: 600;
 }
 
+
 .main-navigation li {
-	float: left;
+	float: right;
 	position: relative;
+	padding: 0px 25px 0px 25px;
 }
 
 .main-navigation a {
 	display: block;
 	text-decoration: none;
+	color: #7a7a7a;
 }
 
+.main-navigation a:hover { color: #35b347;
+}
 .main-navigation ul ul {
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 	float: left;

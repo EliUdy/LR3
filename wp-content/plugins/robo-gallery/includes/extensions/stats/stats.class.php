@@ -14,37 +14,18 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class ROBO_GALLERY_STATS
-{
-    /**
-     * Post type
-     *
-     * @var string
-     */
-    protected $postType;
+class ROBO_GALLERY_STATS{
 
-    /**
-     * Assets directory uri
-     *
-     * @var string
-     */
+    protected $postType;
     protected $assetsUri;
 
-
-    /**
-     * @constructor
-     * @param string $postType
-     * @param array $postTypeParams
-     */
-    public function __construct($postType)
-    {
+    public function __construct($postType){
         $this->postType = $postType;
         $this->assetsUri = plugin_dir_url(__FILE__);
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
     }
 
-    public function enqueueScripts()
-    { 
+    public function enqueueScripts(){ 
         if ( 
         		rbs_gallery_get_current_post_type() == ROBO_GALLERY_TYPE_POST && 
         		rbs_gallery_is_edit_page('list') 

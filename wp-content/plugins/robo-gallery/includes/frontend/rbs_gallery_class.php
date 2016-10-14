@@ -123,12 +123,18 @@ class roboGallery extends roboGalleryUtils{
  		if( get_option( ROBO_GALLERY_PREFIX.'jqueryVersion', 'build' )=='forced' ){
  			$this->styleList[] = ROBO_GALLERY_URL.'gallery/css/magnific.css';
  			$this->styleList[] = ROBO_GALLERY_URL.'gallery/css/gallery.css';
+ 			if(get_option( ROBO_GALLERY_PREFIX.'fontLoad', 'on' )=='on'){
+ 				$this->styleList[] = ROBO_GALLERY_URL.'gallery/css/gallery.font.css';
+ 			}
  			$this->styleList[] = ROBO_GALLERY_URL.'gallery/css/gallery.utils.css';
  			$this->styleList[] = ROBO_GALLERY_URL.'css/style.css';
  			$this->styleList[] = ROBO_GALLERY_URL.'addons/button/buttons.css';
  		} else {
 			wp_enqueue_style( 'robo-gallery-magnific', 	ROBO_GALLERY_URL.'gallery/css/magnific.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
-			wp_enqueue_style( 'robo-gallery-gallery', 	ROBO_GALLERY_URL.'gallery/css/gallery.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
+			wp_enqueue_style( 'robo-gallery-style', 	ROBO_GALLERY_URL.'gallery/css/gallery.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
+			if(get_option( ROBO_GALLERY_PREFIX.'fontLoad', 'on' )=='on'){
+				wp_enqueue_style( 'robo-gallery-font', 		ROBO_GALLERY_URL.'gallery/css/gallery.font.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
+			}
 			wp_enqueue_style( 'robo-gallery-utils', 	ROBO_GALLERY_URL.'gallery/css/gallery.utils.css',array(), ROBO_GALLERY_VERSION, 'all' );
 			wp_enqueue_style( 'robo-gallery-rbs-style', ROBO_GALLERY_URL.'css/style.css', 				array(), ROBO_GALLERY_VERSION, 'all' );
 			wp_enqueue_style( 'robo-gallery-rbs-button',ROBO_GALLERY_URL.'addons/button/buttons.css', 	array(), ROBO_GALLERY_VERSION, 'all' );

@@ -1,15 +1,18 @@
 === Gallery - Photo Gallery and Images Gallery ===
-Contributors: robosoft
-Tags: gallery, Gallery Plugin, photo gallery, images gallery, responsive gallery, categories gallery, Polaroid gallery, gallery lightbox, pictures, images, portfolio gallery, video gallery
+Contributors: gallerysupport, robosoft
+Donate link: http://robosoft.co/robogallery
+Tags: gallery, photo gallery, images gallery, gallery images, responsive gallery, categories gallery, Polaroid gallery, gallery lightbox, portfolio gallery, video gallery, Gallery Plugin, Robo Gallery
 Requires at least: 3.3
 Tested up to: 4.6
-Stable tag: 2.4.2
+Stable tag: 2.4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Gallery. It's really attractive part of your pages. Gallery with categories, highly customizable gallery with videos, links and lightbox
+Gallery modes: photo gallery, images gallery, video gallery, Polaroid gallery, gallery lighbox, portfolio gallery, responsive gallery 
 
 == Description ==
+
+= Gallery - Robo Gallery =
 
 #### [Gallery Most Easy and Powerful plugin to create attractive image section on your WordPress website.](http://robosoft.co/robogallery/#overview)
 
@@ -109,6 +112,27 @@ Gallery. It's really attractive part of your pages. Gallery with categories, hig
 *   Drag and Drop Category Manager
 
 
+= Robo Gallery Advantages =
+
+Robo Gallery it's wordpress gallery plugin which could help you to create different images gallery. Robo gallery could be used as photo gallery, classic images gallery with traditional layout and square thumbnails or as Polaroid gallery. Robo gallery have different configuration settings which gonna help to create porfolio gallery with your projects images. Robo gallery could be also used as video gallery on your website.
+
+= Responsive gallery =
+
+Robo gallery it's responive gallery what is really important for the website page rank. Robo gallery work on mobile devices as stable part of your website interface. Robo gallery lightbox also fully responsive and mobile devices friendly.
+
+= Polaroid gallery =
+
+Robo gallery have buil-in Polaroid gallery mode. When you turn on Polaroid gallery mode every thumbnail of the photo gallery will have additional panel below thumbnails where you can publish title, description or caption of images gallery.
+
+= Portfolio gallery =
+
+Images gallery it's a best form to represent your porfolion on your website. With Robo photo gallery you can easily build your portfolio with images galleries, video galleries. Every images gallery could have different settings. You can create absolutely different photo galleies on your page which fit to your needs and design the best way.
+
+= Video gallery, gallery lightbox, gallery links =
+
+Robo gallery have advanced functionality which provide you ide range of settings for configuring gallery images links, video galleries and gallery lightbox. Every images gallery have link and video link options where you can specify proper value for every element of the photo gallery. For your video gallery you can use videos hosted on Youtube or Vimeo. Image settings have field where you can define direct link to this gallery. Gallery lightbox have different settings for interface styling.
+
+
 > #### Useful Gallery Links 
 >
 >[Multi Categories Cars Gallery Demo](http://robosoft.co/demo/gallery/cars-gallery-demo/)
@@ -200,6 +224,33 @@ Gallery implemented in native Wordpress style. All code implemented based on Wor
 If any problem occurs, please contact us.
 
 == Changelog ==
+
+= 2.4.8 =
+*   Updated gallery statistics and fixed reset statistic function
+*   Updated description of the plugin, explanation of the life cases
+
+= 2.4.7 =
+*   Updated font options
+*   Added new awesome font load modes
+*   Updated awesome font load process to avoid conflicts
+*   Code cleaning, removed/replaced old libs
+*   Plugin code structure optimization
+
+= 2.4.6 =
+*   Fixed gallery link option
+*   Fixed default gallery output after installation event
+
+= 2.4.5 =
+*   Fixed express panel publishing issues, per users requests
+*   Added show/hide option for express panel
+*   Turned off express panel by default
+
+= 2.4.4 =
+*   Fixed tag error in plugin source to avoid warning
+
+= 2.4.3 =
+*   Added new Express Panel for fast settings save
+*   Scroll effect for Express Panel
 
 = 2.4.2 =
 *   Updated statistics, added new reset button
@@ -846,6 +897,33 @@ If any problem occurs, please contact us.
 *   First release
 
 == Upgrade Notice ==
+
+= 2.4.8 =
+Updated gallery statistics and fixed reset statistic function
+Updated description of the plugin, explanation of the life cases
+
+= 2.4.7 =
+Updated font options
+Added new awesome font load modes
+Updated awesome font load process to avoid conflicts
+Code cleaning, removed/replaced old libs
+Plugin code structure optimization
+
+= 2.4.6 =
+Fixed gallery link option
+Fixed default gallery output after installation event
+
+= 2.4.5 =
+Fixed express panel publishing issues, per users requests
+Added show/hide option for express panel
+Turned off express panel by default 
+
+= 2.4.4 =
+Fixed tag error in plugin source to avoid warning
+
+= 2.4.3 =
+Added new Express Panel for fast settings save
+Scroll effect for Express Panel
 
 = 2.4.2 =
 Updated statistics, added new reset button

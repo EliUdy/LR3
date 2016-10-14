@@ -51,6 +51,7 @@ class Plugin {
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
+			do_action( 'elementor/loaded' );
 		}
 		return self::$_instance;
 	}
@@ -64,6 +65,8 @@ class Plugin {
 		foreach ( $cpt_support as $cpt_slug ) {
 			add_post_type_support( $cpt_slug, 'elementor' );
 		}
+
+		do_action( 'elementor/init' );
 	}
 
 	private function _includes() {
@@ -85,6 +88,8 @@ class Plugin {
 		include( ELEMENTOR_PATH . 'includes/preview.php' );
 		include( ELEMENTOR_PATH . 'includes/frontend.php' );
 		include( ELEMENTOR_PATH . 'includes/heartbeat.php' );
+		include( ELEMENTOR_PATH . 'includes/responsive.php' );
+		include( ELEMENTOR_PATH . 'includes/stylesheet.php' );
 
 		include( ELEMENTOR_PATH . 'includes/settings/system-info/main.php' );
 		include( ELEMENTOR_PATH . 'includes/tracker.php' );
@@ -92,6 +97,10 @@ class Plugin {
 
 		if ( is_admin() ) {
 			include( ELEMENTOR_PATH . 'includes/admin.php' );
+
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+				include( ELEMENTOR_PATH . 'includes/image-manager.php' );
+			}
 		}
 	}
 
@@ -124,8 +133,6 @@ class Plugin {
 		if ( is_admin() ) {
 			new Admin();
 		}
-
-		do_action( 'elementor/loaded' );
 	}
 }
 

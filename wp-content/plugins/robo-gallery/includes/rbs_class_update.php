@@ -61,6 +61,9 @@ class RoboGalleryUpdate {
 		if( $this->dbVersionOld && $this->dbVersionOld == $this->dbVersion )  $this->needUpdate = false;
 
 		if( $this->needUpdate ){
+			delete_option("robo_gallery_after_install");
+			add_option( 'robo_gallery_after_install', '1' );
+
 			delete_option("rbs_gallery_db_version");
 			add_option( "rbs_gallery_db_version", ROBO_GALLERY_VERSION );
 			$this->posts = $this->getGalleryPost();

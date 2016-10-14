@@ -16,7 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class RoboGalleryActivator {
 	public static function activate() {
-		add_option( 'RoboGalleryInstall', 'now' );
+		delete_option("robo_gallery_after_install");
+		add_option( 'robo_gallery_after_install', '1' );
 	}
 
 	public static function deactivate() {

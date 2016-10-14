@@ -2,8 +2,8 @@
 Contributors: JoomUnited
 Tags: latest post, news widget, recent posts, posts, recent post widget, news posts, latest page, custom content, previous posts, page, featured posts, article display, news display, news slider, page display, post display, article display, frontpage news, news
 Requires at least: 4.0
-Tested up to: 4.6.0
-Stable tag: 3.7.5
+Tested up to: 4.6.1
+Stable tag: 3.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +11,7 @@ WP Latest posts is loading your content from posts, page, tags or custom post ty
 
 == Description ==
 
-The main idea of this plugin is to visually take the latest or custom content like WordPress posts, pages, tagged content or custom post type and display it as a slider. Some additional themes are also available. This is definitively the best way to build a news page without coding anything. Build your news layout and let’s take care of your content only. The final news display manager.
+The main idea of this plugin is to visually take the latest or custom content like WordPress posts, pages, tagged content or custom post type and display it as a slider. Some additional themes are also available. This is definitively the best way to build a news page without coding anything. Build your news layout and let�s take care of your content only. The final news display manager.
 
 = Video demo: =
 [vimeo https://vimeo.com/77775570]
@@ -80,7 +80,7 @@ Main plugins from JoomUnited:
 * WP File Download: https://www.joomunited.com/wordpress-products/wp-table-manager
 * WP Table Manager: https://www.joomunited.com/wordpress-products/wp-file-download
 * WP Meta SEO: https://www.joomunited.com/wordpress-products/wp-meta-seo
-* WP Latest Posts: https://www.joomunited.com/wordpress-products/wp-latest-posts
+* WP Speed of Light: https://www.joomunited.com/wordpress-products/wp-speed-of-light
 
 **Still not sure! test the plugin live on a demo website:** https://addendio.com/try-plugin/?slug=wp-latest-posts
 
@@ -135,6 +135,31 @@ Yes the support has been added since the 3.5.2 version.
  
 
 == Changelog ==
+= 3.9.0 : =
+* Multisite feature: an option to call content from latest post from all sites within the network
+
+= 3.8.5 : =
+* Convert from "css.php" to "css", security fix
+* Remove old "css.php" file and fallback to new "css"
+* Set grey color by default for background in portfolio theme
+
+= 3.8.4 : =
+* Fix handle name to avoid load a js file multiple and some effect of theme
+
+= 3.8.3 : =
+* Fix only last widget loaded when multiple widget on the same page
+
+= 3.8.2 : =
+* Fix effect not applicated
+
+= 3.8.1 : =
+* Fix conflict issues with the minify plugin
+
+= 3.8.0 : =
+* Convert from "js.php" to "js", security fix
+* Remove old default theme and fallback to new one
+* Fix issue in case of 2+ news block with "load more" feature activated
+
 = 3.7.5 : =
 * Fix possible XSS vulnerability
 
@@ -147,7 +172,7 @@ Yes the support has been added since the 3.5.2 version.
 * Fix Load more button style on some theme
 
 = 3.7.2 : =
-* Add a an option to add a “load more” button
+* Add a an option to add a �load more� button
 
 = 3.7.1 : =
 * Fix layout of the tooltip to insert news block in content and default logo

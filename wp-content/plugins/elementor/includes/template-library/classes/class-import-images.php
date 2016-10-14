@@ -44,17 +44,16 @@ class Import_Images {
 		if ( $saved_image )
 			return $saved_image;
 
-		/**
-		 * @var $wp_filesystem \WP_Filesystem_Base
-		 */
-		global $wp_filesystem;
-
 		// Extract the file name and extension from the url
 		$filename = basename( $attachment['url'] );
 
-		$file_content = $wp_filesystem->get_contents( $attachment['url'] );
+		if ( function_exists( 'file_get_contents' ) ) {
+			$file_content = file_get_contents( $attachment['url'] );
+		} else {
+			$file_content = wp_remote_retrieve_body( wp_safe_remote_get( $attachment['url'] ) );
+		}
 
-		if ( ! $file_content ) {
+		if ( empty( $file_content ) ) {
 			return false;
 		}
 
@@ -75,7 +74,7 @@ class Import_Images {
 		} else {
 			// For now just return the origin attachment
 			return $attachment;
-			//return new \WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'pojo-importer' ) );
+			//return new \WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'elementor' ) );
 		}
 
 		$post_id = wp_insert_attachment( $post, $upload['file'] );

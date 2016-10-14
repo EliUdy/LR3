@@ -359,7 +359,7 @@ html[xmlns] .defaultflexslide {
 }
 
 .flex-viewport {
-	max-height: 2000px;
+	max-height: 3500px; /* FIX the problem of the news block with a lot of content */
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
 	-o-transition: all 1s ease;
@@ -407,6 +407,7 @@ html[dir="rtl"] .flex-viewport {
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	transition: all .3s ease;
+	box-shadow: none;
 }
 
 .flex-direction-nav .flex-prev {

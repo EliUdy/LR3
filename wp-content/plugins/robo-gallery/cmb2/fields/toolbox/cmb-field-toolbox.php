@@ -23,9 +23,29 @@ class RBS_TOOLBOX {
 	}
 	
 	public function rbs_setup_admin_script(){
-		echo '<script>'
-			.'var ROBO_GALLERY_PRO = '.ROBO_GALLERY_PRO.';'
-		.'</script>';
+		echo '<script type="text/javascript"> var ROBO_GALLERY_PRO = '.ROBO_GALLERY_PRO.';</script>';
+
+		/* Express panel +*/
+		if( isset($_GET['post']) && get_option(  ROBO_GALLERY_PREFIX.'expressPanel' ) ){
+		echo '
+			<div id="robo_gallery_savebutton_dialog_id" class="robo_gallery_savebutton_dialog_hide">
+				<h3>Express Panel</h3>
+				<p>
+					click update button to save your changes rigth away
+				</p>
+				<p>
+					<button id="robo_gallery_update_button" class="button button-primary button-large">Update</button>
+				</p>
+			</div> 
+			<script type="text/javascript">
+				var panelDiv = document.getElementById("robo_gallery_savebutton_dialog_id");
+				document.body.appendChild(panelDiv); 
+				panelDiv.className = "robo_gallery_savebutton_dialog";
+				var buttonRoboGallerySave = document.getElementById("robo_gallery_update_button");
+				buttonRoboGallerySave.onclick = function(){ document.getElementById("publish").click(); return false };  
+			</script>';
+		}
+		/* Express panel - */
 	}
 
 	public function rbs_setup_admin_header(){
@@ -82,10 +102,11 @@ class RBS_TOOLBOX {
 		wp_enqueue_style(  'rbs-toolbox-toggles-css',	ROBO_GALLERY_URL.'addons/toggles/css/bootstrap-toggle.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
 
 		//iconPicker
-		wp_enqueue_script( 	'rbs-toolbox-iconset', 		ROBO_GALLERY_URL.'addons/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.1.0.min.js', 		array( 'jquery', 'rbs_bootstrap' ), ROBO_GALLERY_VERSION, true );
+		wp_enqueue_script( 	'rbs-toolbox-iconset', 		ROBO_GALLERY_URL.'addons/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.3.0.min.js', 		array( 'jquery', 'rbs_bootstrap' ), ROBO_GALLERY_VERSION, true );
 		wp_enqueue_script( 	'rbs-toolbox-icon', 		ROBO_GALLERY_URL.'addons/bootstrap-iconpicker/js/bootstrap-iconpicker.js', 							array( 'jquery', 'rbs_bootstrap', 'rbs-toolbox-iconset' ), ROBO_GALLERY_VERSION, true );		
-		wp_enqueue_style( 	'rbs-toolbox-icon-css', 	ROBO_GALLERY_URL.'addons/bootstrap-iconpicker/css/bootstrap-iconpicker.css', 						array(), ROBO_GALLERY_VERSION, 'all' );
-		wp_enqueue_style( 	'rbs-toolbox-icon-fonts', 	ROBO_GALLERY_URL.'addons/bootstrap-iconpicker/icon-fonts/font-awesome-4.1.0/css/font-awesome.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
+		wp_enqueue_style( 	'rbs-toolbox-icon-css', 	ROBO_GALLERY_URL.'addons/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css', 						array(), ROBO_GALLERY_VERSION, 'all' );
+		
+		wp_enqueue_style( 	'rbs-toolbox-icon-fonts', 	ROBO_GALLERY_URL.'gallery/css/gallery.font.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
 			
 		//color
 		wp_enqueue_script( 'rbs-toolbox-color-tinycolor', ROBO_GALLERY_URL.'addons/color/bootstrap.colorpickersliders.tinycolor.js', 	array( 'jquery', 'rbs_bootstrap' ), ROBO_GALLERY_VERSION, false );
@@ -98,8 +119,8 @@ class RBS_TOOLBOX {
 	
 		if(!get_option(ROBO_GALLERY_PREFIX.'switchStyle', 0)){
 			//select
-			wp_enqueue_script('rbs-toolbox-bootstrap-select', ROBO_GALLERY_URL.'addons/bootstrap-select/js/bootstrap-select.min.js', 	array( 'jquery', 'rbs_bootstrap' ), ROBO_GALLERY_VERSION, true );
-			wp_enqueue_style( 'rbs-toolbox-bootstrap-select', ROBO_GALLERY_URL.'addons/bootstrap-select/css/bootstrap-select.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
+			wp_enqueue_script('rbs-toolbox-bootstrap-select-js', ROBO_GALLERY_URL.'addons/bootstrap-select/js/bootstrap-select.min.js', 	array( 'jquery', 'rbs_bootstrap' ), ROBO_GALLERY_VERSION, true );
+			wp_enqueue_style( 'rbs-toolbox-bootstrap-select-css', ROBO_GALLERY_URL.'addons/bootstrap-select/css/bootstrap-select.css', 	array(), ROBO_GALLERY_VERSION, 'all' );
 		}
 
 		//admin.base

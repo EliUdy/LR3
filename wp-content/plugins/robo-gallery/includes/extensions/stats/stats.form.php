@@ -14,12 +14,53 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+$countPosts = wp_count_posts(ROBO_GALLERY_TYPE_POST);
+
+$args = array(
+	'post_type'  => ROBO_GALLERY_TYPE_POST,
+	'meta_key'   => 'gallery_views_count',
+	'posts_per_page' =>-1,
+);
+$allViews = 0;
+$loop = new WP_Query($args);
+$allImages = 0;
+
+$clearStat = 0;
+if ( isset( $_GET['clearStat'] ) && $_GET['clearStat']==1 ) $clearStat=1;
+
+if ( $loop->have_posts() ){
+	for ($i=0; $i <count($loop->posts) ; $i++) { 
+
+		$images = get_post_meta( $loop->posts[$i]->ID, ROBO_GALLERY_PREFIX.'galleryImages', true);
+		if( isset($images) && is_array($images) && count($images) ){
+			$allImages += count($images);
+		}
+		if($clearStat){
+			delete_post_meta( $loop->posts[$i]->ID, 'gallery_views_count');
+			add_post_meta( $loop->posts[$i]->ID, 'gallery_views_count', '0');
+		}
+		$amt = get_post_meta( $loop->posts[$i]->ID, 'gallery_views_count', true);
+		if ($amt) {$allViews += $amt;};
+	}
+}
+
+
 ?>
 <div class="wrap">
 	<h1  class="rbs-stats">
 		<?php _e('Robo Gallery Statistics', 'rbs_gallery'); ?> 
-		<a id="robo_gallery_reset_stat" href="edit.php?post_type=robo_gallery_table&page=robo-gallery-stats" class="page-title-action"><?php _e('Reset', 'rbs_gallery'); ?></a>
+		<a id="robo_gallery_reset_stat" href="edit.php?post_type=robo_gallery_table&page=robo-gallery-stats&clearStat=1" class="page-title-action"><?php _e('Reset', 'rbs_gallery'); ?></a>
 	</h1>
+
+	<?php if(isset($_GET['clearStat']) && $_GET['clearStat']==1 ){ ?>
+		<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible"> 
+			<p><strong><?php _e('Statistics Reset.', 'rbs_gallery'); ?></strong></p>
+			<button type="button" class="notice-dismiss">
+				<span class="screen-reader-text"><?php _e('Dismiss this notice.'); ?></span>
+			</button>
+		</div>
+	<?php } ?>
+
 <br>
 
 <?php 
@@ -33,41 +74,12 @@ if(!function_exists('rbs_stats_tabs')){
 	    echo '<h2 class="nav-tab-wrapper">';
 		    foreach( $tabs as $tab => $name ){
 		        $class = ( $tab == $current ) ? ' nav-tab-active' : '';
-		        echo "<a class='nav-tab$class' href='edit.php?post_type=robo_gallery_table&page=robo-gallery-stats&tab=$tab'>$name</a>";
+		        echo '<a class="nav-tab'.$class.'" href="edit.php?post_type=robo_gallery_table&page=robo-gallery-stats&tab='.$tab.'">'.$name.'</a>';
 		    }
 	    echo '</h2>';
 	}
 }
 $tab = 'gallery';
-//if ( isset( $_GET['tab'] ) )  $tab = $_GET['tab'];
-//if ( isset( $_POST['tab'] ) ) $tab = $_POST['tab'];
-//rbs_stats_tabs( $tab);
-
-$today = date("Y_j_n"); 
-$countPosts = wp_count_posts(ROBO_GALLERY_TYPE_POST);
-//print_r($countPosts);
-
-$args = array(
-	'post_type'  => ROBO_GALLERY_TYPE_POST,
-	'meta_key'   => 'gallery_views_count',
-	'posts_per_page' =>-1,
-);
-$allViews = 0;
-$loop = new WP_Query($args);
-$allImages = 0;
-
-if ( $loop->have_posts() ){
-	for ($i=0; $i <count($loop->posts) ; $i++) { 
-
-		$images = get_post_meta( $loop->posts[$i]->ID, ROBO_GALLERY_PREFIX.'galleryImages', true);
-		if( isset($images) && is_array($images) && count($images) ){
-			$allImages += count($images);
-		}
-
-		$amt = get_post_meta( $loop->posts[$i]->ID, 'gallery_views_count', true);
-		if ($amt) {$allViews += $amt;};
-	}
-}
 
 switch ($tab) {
 	case 'gallery':

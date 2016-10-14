@@ -52,6 +52,8 @@ if(!function_exists('robo_gallery_settings_submenu_page')){
 		register_setting( 'rbs_gallery_settings', ROBO_GALLERY_PREFIX.'debugEnable' );
 		register_setting( 'rbs_gallery_settings', ROBO_GALLERY_PREFIX.'categoryShow' );
 		register_setting( 'rbs_gallery_settings', ROBO_GALLERY_PREFIX.'seo' );
+		register_setting( 'rbs_gallery_settings', ROBO_GALLERY_PREFIX.'expressPanel' );
+		register_setting( 'rbs_gallery_settings', ROBO_GALLERY_PREFIX.'fontLoad' );
 	}
 }
 

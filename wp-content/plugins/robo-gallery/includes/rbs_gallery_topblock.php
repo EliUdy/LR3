@@ -25,7 +25,7 @@ if(!function_exists('rbs_gallery_topblock')){
 		</div>';
 
 		if( defined('ROBO_GALLERY_SPECIAL') && ROBO_GALLERY_SPECIAL ){
-			$installDate = get_option( 'RoboGalleryInstallDate');
+			$installDate = get_option( ROBO_GALLERY_PREFIX.'InstallDate' );
 			//echo "<br> ".time()." - ".$installDate." = " .(time() - $installDate ).' > '. 60*60;
 			if( $installDate && ( ( time() - $installDate ) < 60*60 ) ){
 

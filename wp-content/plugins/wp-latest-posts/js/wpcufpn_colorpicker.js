@@ -90,8 +90,6 @@
 
                 context.drawImage(colorPicker, 0, 0, this.width, this.height);
             });
-			console.log(self.options.backgroundUrl);
-			console.log(backgroundUrl);
             colorPicker.src = self.options.backgroundUrl || backgroundUrl;
         }
 
